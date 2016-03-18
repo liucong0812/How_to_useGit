@@ -66,9 +66,31 @@ Setup completed
 
 ### 编辑 Podfile
 
-使用你喜欢的方式打开Podfile文件，然后把上述得出的命令中 `pod 'AF2OAuth1Client', '~> 0.3.6' `编写进Podfile中
+使用你喜欢的方式打开Podfile文件，
 
-得出如下：
+```
+$vim Podfile 
+
+```
+
+先编辑Podfile中的模板
+
+```
+Uncomment this line to define a global platform for your project
+platform :ios, '6.0' ==> **6.0代表支持的最低版本**
+
+target 'APPName' do
+
+end
+
+target 'APPNameTests' do
+
+end
+
+```
+
+然后把上述得出的命令中 `pod 'AF2OAuth1Client', '~> 0.3.6' `编写进Podfile中
+
 
 ```
 Uncomment this line to define a global platform for your project
@@ -142,3 +164,22 @@ $ pod update --verbose --no-repo-update
 ```
 
 然后试试吧。。  看看能不能导入头文件了 
+
+
+##删除项目中的cocopod文件
+1. 删除工程文件夹下的Podfile、Podfile.lock和Pods文件夹。
+2. 删除xcworkspace 文件
+3. 打开xcodeproj文件 删除项目中的libpods.a 和 Pods.xcconfig引用![Alt text](http://img.blog.csdn.net/20140214225805921 "Optional title")
+4. 打开Build Phases选项，删除Check Pods Manifest.lock和Copy Pods Resources：![Alt text](http://img.blog.csdn.net/20140214230048593 "Optional title")
+5. 完成，编译运行，无错通过。
+
+ps:如果将cocoapods集成到工程中后不小心修改或删除了其相关文件导致无法便以通过例如：不小心把
+Pods.xcconfig给删除了然后出现diff: /../Podfile.lock: No such file or directory，用上面的方法删除cocoapods后，
+再重新$sudo pod install一下就好了。
+如果编译的时候出现权限问题，对工程文件夹$sudo chmod 777 path-to-project-folder/*
+$sudo chown 777 path-to-project-folder/*
+即可。
+
+
+
+
